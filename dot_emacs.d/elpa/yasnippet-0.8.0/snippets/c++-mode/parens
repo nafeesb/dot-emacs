@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: parens ( selection )
+# key: parens
+# --
+$0( `yas/selected-text` )

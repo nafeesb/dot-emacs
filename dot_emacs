@@ -1,0 +1,467 @@
+;; ----------------------------------------
+;; General Emacs preferences
+;; ----------------------------------------
+
+( tool-bar-mode -1 )
+
+;; enable visual feedback on selections
+(setq transient-mark-mode t)
+
+(setq inhibit-startup-message   t)
+(display-time)
+(setq read-file-name-completion-ignore-case t)
+
+(setq scroll-preserve-screen-position t)
+(setq scroll-step 1)
+(setq scroll-conservatively 5)
+
+;; always end a file with a newline
+(setq require-final-newline 'query)
+
+;; default to better frame titles
+(setq frame-title-format "%b")
+
+;; use visual flash instead of an audible bell
+(setq visible-bell t)
+
+;; column numbers to the left
+(require 'linum)
+(global-linum-mode t)
+
+;; default to unified diffs
+(setq diff-switches "-u")
+
+
+;; ----------------------------------------
+;; -- KEY BINDINGS
+;; ----------------------------------------
+
+;; Set up the keyboard so the delete key on both the regular keyboard
+;; and the keypad delete the character under the cursor and to the right
+;; under X, instead of the default, backspace behavior.
+(global-set-key [?\C-h]     'delete-backward-char)
+(global-set-key [delete]    'delete-char)
+(global-set-key [kp-delete] 'delete-char)
+
+;; Switch keybinding for C-h to C-x h
+(global-set-key "\C-xh" 'help-command)
+
+(global-set-key [down-S-mouse-1] 'mouse-buffer-menu)
+(global-set-key [f5] 'grep)
+
+(global-set-key "\M-g" 'goto-line)
+(global-set-key "\M-:" 'goto-line)
+
+(iswitchb-mode 1)
+(global-set-key [f12] 'iswitchb-buffer)
+
+(global-set-key
+ "\M-r"
+ (lambda (&optional force-reverting)
+   "Interactive call to revert-buffer. Ignoring the auto-save
+ file and not requesting for confirmation. When the current
+ buffer is modified, the command refuses to revert it, unless you
+ specify the optional argument: force-reverting to true."
+   (interactive "P")
+   ;;(message "force-reverting value is %s" force-reverting)
+   (if (or force-reverting (not (buffer-modified-p)))
+       (revert-buffer :ignore-auto :noconfirm)
+     (error "The buffer has been modified"))))
+
+;; Locked mode
+(global-set-key (kbd "C-c C-l") 'locked-buffer-mode)
+
+(define-minor-mode locked-buffer-mode
+  "Make the current window always display this buffer."
+  nil " locked" nil
+  (set-window-dedicated-p (selected-window) locked-buffer-mode))
+
+;; ----------------------------------------
+;; -- ELPA
+;; ----------------------------------------
+(require 'package)
+(setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
+			 ("marmalade" . "http://marmalade-repo.org/packages/")
+                         ;("melpa" . "http://melpa.milkbox.net/packages/")
+))
+
+;; shell colors
+( require 'ansi-color )
+(defun colorize-compilation-buffer ()
+  (message "colorizing compilation")
+  (toggle-read-only)
+  (ansi-color-apply-on-region (point-min) (point-max))
+  (toggle-read-only))
+(add-hook 'compilation-filter-hook 'colorize-compilation-buffer)
+;;( ansi-color-for-comint-mode-on )
+
+;; yasnippet
+( add-to-list 'load-path "/home/nbinzafar/.emacs.d/elpa/yasnippet-0.8.0" )
+( require 'yasnippet )
+( yas-global-mode 1 )
+( setq yas/prompt-functions '(yas/ido-prompt yas/dropdown-prompt))
+( global-set-key [f11] 'yas/insert-snippet )
+
+
+;; ----------------------------------------
+;; -- Window Cycling
+;; ----------------------------------------
+
+(setq win-cycle-dir 1)
+(defun select-last-nbor-window ()
+  "Switch to the previous window" 
+  (setq win-cycle-dir (* win-cycle-dir -1))
+  (interactive)
+  (other-window win-cycle-dir))
+
+(defun select-next-window ()
+  "Switch to the next window"
+  (setq win-cycle-dir 1)
+  (interactive)
+  (select-window (next-window)))
+
+(defun select-previous-window ()
+  "Switch to the previous window" 
+  (setq win-cycle-dir -1)
+  (interactive)
+  (select-window (previous-window)))
+
+(global-set-key "\M-o" 'select-last-nbor-window)
+
+(global-set-key (kbd "M-<up>") 'select-next-window)
+(global-set-key (kbd "<XF86Forward>") 'select-next-window)
+
+(global-set-key (kbd "M-<down>")  'select-previous-window)
+(global-set-key (kbd "<XF86Back>")  'select-previous-window)
+
+(global-set-key (kbd "M-<left>") 'previous-buffer)
+(global-set-key (kbd "M-<right>") 'next-buffer)
+
+
+;; ----------------------------------------
+;; Window Settings
+;; ----------------------------------------
+(cond (window-system
+       (set-background-color "gray10")
+       (set-foreground-color "gray85")
+       (set-cursor-color "violet" )
+       (autoload 'faces "faces" t )
+       (set-face-foreground 'bold "red" )
+       (set-face-foreground 'bold-italic "blue" )
+       (set-face-foreground 'italic "deeppink2" )
+       (set-face-background 'highlight "thistle3")
+       (set-face-foreground 'underline "darkorange4" )
+       (set-face-foreground 'mode-line "black")
+       (set-face-background 'mode-line "Orange")
+       ;; (set-face-foreground 'region "green4")                     ;; marked text
+       ;; (set-face-background 'region "black")
+       (set-face-foreground 'region "red3")                     ;; marked text
+       (set-face-background 'region "antiquewhite1")
+       (set-face-foreground 'secondary-selection "yellow4")
+       (set-frame-font "-unknown-Droid Sans Mono-normal-normal-normal-*-12-*-*-*-m-0-iso10646-1")))
+
+
+;; ----------------------------------------
+;; Dev settings
+;; ----------------------------------------
+
+;;
+;; IDE tab and indentation settings.
+;; http://cc-mode.sourceforge.net/html-manual/Syntactic-Symbols.html
+;;
+;; The settings are basically stroustrup mode, but a few differences
+(defun nb-ide-tabsets-personal ()
+  (setq indent-tabs-mode nil)
+  (setq tab-width 4)
+  (setq c-basic-offset tab-width)
+  (c-set-offset 'statement-block-intro '+)
+  (c-set-offset 'defun-block-intro '+)
+  (c-set-offset 'substatement '+)
+  (c-set-offset 'substatement-open 'c-indent-one-line-block)
+  (c-set-offset 'brace-list-open 0)  ;; enum \n { ...
+  (c-set-offset 'innamespace 0)      ;; namespace ... {
+  (c-set-offset 'access-label -4)    ;; public/private/protected
+  (c-set-offset 'case-label +2)      ;; switch (...) { label:
+  (c-set-offset 'statement-case-open 0)
+  (c-set-offset 'statement-cont 'c-lineup-math)
+  (c-set-offset 'inline-open +2)
+ ; (setq special-display-buffer-names '("*compilation*" "*grep*")) ;; display in a separate frame
+  )
+
+;;( nb-ide-tabsets-personal )
+
+;; Load the appropriate interaction-mode for given source file extensions
+(setq auto-mode-alist
+     (append '(("\\.env$"  . shell-script-mode)
+	       ("\\.mel$"  . tcl-mode)
+	       ("SConstruct" . python-mode)
+	       ("SConscript" . python-mode)
+               )
+             auto-mode-alist))
+
+(fset 'grep-in-code
+  [escape ?w f5 ?" ?\C-y ?" ? ?* ?. ?p?y ?  ?* ?. ?h ?  ?* ?. ?H ?  ?* ?. ?c ?  ?* ?. ?C ?  ?* ?. ?c?p?p ?  ?* ?. ?c?c ?  ?* ?. ?h?p?p return])
+
+(global-font-lock-mode 1)
+(font-lock-mode 1)
+(column-number-mode 1)
+
+(makunbound 'c++-mode)
+(makunbound 'c++-mode-map)
+(makunbound 'c-style-alist)
+
+;; .h files treated as c++
+(add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
+
+;;
+;; Use C-c C-v in c-mode to do a compile
+(setq-default compile-command "scons ")
+(defun my-save-and-compile ()
+ (interactive "")
+ (save-buffer 0)
+ (compile compile-command))
+(global-set-key "\C-c\C-v" 'compile)
+(global-set-key [f9] 'my-save-and-compile)
+
+;; compilation error detection regexp
+(setq compilation-skip-threshold 2)
+
+;; support intel compiler and GNU output only
+(setq compilation-error-regexp-alist (list 'edg-1 'gnu))
+
+;;
+;; Set an an explicit tab stop
+(defun set-tab-here ()
+ (interactive "")
+ (setq tab-stop-list (cons (current-column) tab-stop-list ) )
+ )
+
+
+;;
+;; Hop between matching parens
+(defun match-paren (arg)
+ "Go to the matching paren if on a paren; otherwise insert %."
+ (interactive "p")
+ (cond ((looking-at "\\s\(") (forward-list 1) (backward-char 1))
+       ((looking-at "\\s\)") (forward-char 1) (backward-list 1))
+       (t (error "%s" "Not on a paren"))
+       ))
+
+;;
+;; align with the preceding '=' in a statement
+(defun c++-lineup-statement-cont (langelem)
+ (save-excursion
+   (goto-char (cdr langelem))
+   (c-syntactic-re-search-forward c-assignment-op-regexp (min endpos (c-point 'eol)) t t t)
+   (goto-char (+ (match-beginning 0) 2))
+   (vector (current-column))));; Generic option for all programming environs
+
+
+;;
+;; Settings for additional library loads
+(defun nb-ide-loads ()
+ )
+
+(defun comment-dwim-line (&optional arg)
+  "If no region is selected and current line is not blank and we are not at the end of the line,
+   then comment current line.  Replaces default behaviour of
+   comment-dwim, when it inserts comment at the end of the line."
+  (interactive "*P")
+  (comment-normalize-vars)
+  (if (and (not (region-active-p)) (not (looking-at "[ \t]*$")))
+      (comment-or-uncomment-region (line-beginning-position) (line-end-position))
+    (insert " // ");(comment-dwim arg)
+    ))
+
+
+(defun nb-ide-bindings ()
+ (global-set-key "\C-m" 'reindent-then-newline-and-indent)
+ (global-unset-key [C-down-mouse-2])
+ (global-set-key [C-down-mouse-2] `imenu)
+ (global-set-key [f6] 'grep-in-code)
+ (global-set-key [C-f1] 'ebrowse-tags-find-definition-other-window)
+ ;; (global-set-key [C-f1] 'ebrowse-tags-find-declaration-other-window)
+ (global-set-key "\M-[" 'match-paren)
+ (global-set-key (read-kbd-macro "C-x <right>") 'next-error)
+ (global-set-key [f2] 'gud-next)
+ (global-set-key [f3] 'gud-step)
+ (global-set-key [(control f2)] 'gud-until)
+ (global-set-key "\M-;" 'comment-dwim-line)
+ (global-set-key "\C-c\C-v" 'compile)
+ (local-set-key  "\C-c\C-v" 'compile)
+ (global-set-key [f9] 'my-save-and-compile)
+ )
+
+(defun nb-ide-hiliting ()
+  (turn-on-font-lock)
+  (setq font-lock-maximum-decoration t)
+  (setq c++-font-lock-extra-types
+	(quote ("\\sw+_t" "\\([iof]\\|str\\)+stream\\(buf\\)?" "ios"
+		"string" "rope" "list" "slist" "deque" "vector" "bit_vector"
+		"set" "multiset" "map" "multimap"
+		"hash\\(_\\(m\\(ap\\|ulti\\(map\\|set\\)\\)\\|set\\)\\)?"
+		"stack" "queue" "priority_queue" "type_info" "iterator" "const_iterator"
+		"reverse_iterator" "const_reverse_iterator" "reference" "const_reference" "uchar" "ulong" "[A-Z][a-z]\\sw+" "X[A-Z][a-z]\\sw+" )))
+  )
+
+(defun nb-ide-settings ()
+  (nb-ide-tabsets-personal)
+  (nb-ide-bindings)
+  (nb-ide-loads)
+  (nb-ide-hiliting)
+  (turn-on-auto-fill)
+  (auto-fill-mode 1)
+  (setq-default fill-column 100)
+  (setq-default comment-fill-column 80)
+  (setq-default comment-column 80)
+  (setq compilation-window-height 20)
+  (setq compilation-scroll-output 'first-error) ;; 1
+  (turn-on-font-lock)
+  (setq font-lock-maximum-decoration t)
+  ( message "Loaded nafees' IDE settings" )
+  )
+
+(defun cc-ide-settings ()
+  ( nb-ide-settings )
+  (c-toggle-hungry-state 1)
+  )
+
+(defun nb-text-hook ()
+ )
+
+;;
+;; Mode Hooks
+;;
+(add-hook 'c++-mode-hook  'cc-ide-settings)     ;; c++ mode
+(add-hook 'c-mode-hook    'cc-ide-settings)     ;; c mode
+(add-hook 'perl-mode-hook 'nb-ide-settings)     ;; perl mode
+(add-hook 'python-mode-hook 'nb-ide-settings)   ;; python
+(add-hook 'java-mode-hook 'nb-ide-settings)     ;; java mode
+(add-hook 'makefile-mode-hook 'nb-ide-settings) ;; makefiles
+(add-hook 'shell-script-mode-hook 'nb-shell-mode-hook)
+(add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
+
+
+
+;; Word count on a region
+(defun count-words-region (beginning end)
+ "Print number of words in the region."
+ (interactive "r")
+ (message "Counting words in region ... ")
+
+ ;;; 1. Set up appropriate conditions.
+ (save-excursion
+   (let ((count 0))
+     (goto-char beginning)
+
+ ;;; 2. Run the while loop.
+     (while (and (< (point) end)
+                 (re-search-forward "\\w+\\W*" end t))
+       (setq count (1+ count)))
+
+ ;;; 3. Send a message to the user.
+     (cond ((zerop count)
+            (message
+             "The region does NOT have any words."))
+           ((= 1 count)
+            (message
+             "The region has 1 word."))
+           (t
+            (message
+             "The region has %d words." count))))))
+
+;; ----------------------------------------
+;; Text Processing Functions
+;; ----------------------------------------
+
+;; Places #ifdef guards in an include file
+(defun replace-in-string (string regexp newtext)
+ (let ((skip (length newtext))
+       (start 0))
+   (while (string-match regexp string start)
+     (setq string (replace-match newtext t t string)
+           start (+ skip (match-beginning 0)))))
+ string)
+
+;; from: http://simon.nitro.dk/dotfiles/emacs/doxygen.el
+(defun doxygen-insert-file-comment ()
+  "Insert a Doxygen file comment at point."
+  (interactive "*")
+  (let ((file-name (if (buffer-file-name)
+                       (file-name-nondirectory (buffer-file-name))
+                     "untitled"))
+        (date-string (format-time-string "%m/%d/%Y" ))
+        (who (user-full-name)))
+    (insert (format (concat "/// @file   %s\n"
+			    "/// @date   %s\n"
+			    "/// @author Nafees Bin Zafar <nafees.bin.zafar@odw.com.cn>\n\n\n")
+                    file-name date-string))))
+
+
+;; ----------------------------------------
+;; Boilerplate
+;; ----------------------------------------
+
+( setq odw-copyright-header "/home/nbinzafar/Documents/ODW_copyright_header.txt" )
+( setq odw-copyright-footer "/home/nbinzafar/Documents/ODW_copyright_footer.txt" )
+
+;;
+;; new C/C++ source
+(defun cpp-boilerplate (copy-header &optional copy-footer)
+  ;; copyright text
+  ;; doxygen file comment
+  ;; copyright text
+  (interactive "fCopyright header: \nfCopyright footer: ")
+  (goto-char 1)
+  (doxygen-insert-file-comment)
+  (goto-char 1)
+  (insert-file-contents copy-header nil )
+  (end-of-buffer)
+  (insert "\n\n")
+  (if copy-footer
+      (insert-file-contents copy-footer nil )
+    (insert-file-contents copy-header nil))
+  (end-of-buffer)
+  )
+
+;;
+;; new C/C++ header file
+(defun odw-include-guard ()
+  ;;  copyright text
+  ;;  include guard
+  ;;  copyright text
+  (interactive)
+  (let* ((inc-name (replace-in-string (buffer-name (current-buffer)) "\\." "_" ) )
+	 (dir-name (nth 0 (last (split-string (file-name-directory (buffer-file-name) ) "/" ) 3 ) ) )
+	 (ftag (concat "__ODW_"
+		       ( upcase dir-name )
+		       "_"
+		       ( upcase inc-name )
+		       "__" ))
+	 )
+    (doxygen-insert-file-comment)
+    (insert (concat "#ifndef " ftag))
+    (newline)
+    (insert (concat "#define " ftag))
+    (newline)
+    (newline)
+    (newline)
+    (insert "#endif")
+    (newline)
+    (newline)
+    )
+  )
+
+;;
+;; insert the ODW Copyright at the beginning and end of the file
+(defun odw-copyright ()
+  (interactive "")
+  (goto-char 1)
+  (insert-file-contents odw-copyright-header nil )
+  (end-of-buffer)
+  (newline)
+  (newline)
+  (insert-file-contents odw-copyright-footer nil )
+  (end-of-buffer)
+  )
+

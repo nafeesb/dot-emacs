@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: func (Define function)
+# key: func
+# --
+/// Document me
+${1:void} 
+${2:function}( $0 )
+{
+
+} // $2()

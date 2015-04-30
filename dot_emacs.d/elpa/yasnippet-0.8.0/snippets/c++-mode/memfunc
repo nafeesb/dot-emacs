@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: memfunc (Define member function)
+# key: memfunc
+# --
+// Document me
+${1:void}
+${2:classname}::${3:method}( $0 )
+{
+
+} // $3()

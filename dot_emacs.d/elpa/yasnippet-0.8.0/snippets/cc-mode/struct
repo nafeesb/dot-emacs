@@ -1,0 +1,8 @@
+# name: struct ... { ... }
+# key: struct
+# --
+/// $0
+struct ${1:name}
+{
+    
+}; // $1

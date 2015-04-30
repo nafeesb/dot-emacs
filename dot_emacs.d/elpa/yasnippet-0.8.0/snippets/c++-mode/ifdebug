@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: ifdebug #ifdef DEBUG ...
+# key: ifdebug
+# --
+#ifdef DEBUG
+`yas/selected-text`#endif
+$0

@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: struct ( TBB for functor )
+# key: tbbfor
+# --
+/// $0
+struct ${1:Name}
+{
+    ${1:$(yas-substr text "[^: ]*")}($2) { }
+
+    /// Thread map operator
+    void operator()( const tbb::blocked_range<std::size_t>& range ) const
+    {
+
+    } // operator()
+
+}; // $1

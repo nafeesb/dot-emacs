@@ -1,0 +1,26 @@
+# -*- mode: snippet -*-
+# name: unittest fixture
+# key: unittest
+# --
+/// Unittest for $0
+class ${1:Name} : public CppUnit::TestFixture
+{
+public:
+    void setUp()
+      {
+      }
+
+    void tearDown() {}
+
+    void test()
+      {
+
+      }
+
+    CPPUNIT_TEST_SUITE( $1 );
+    CPPUNIT_TEST( test );
+    CPPUNIT_TEST_SUITE_END();
+
+}; // $1
+
+CPPUNIT_TEST_SUITE_REGISTRATION( $1 );

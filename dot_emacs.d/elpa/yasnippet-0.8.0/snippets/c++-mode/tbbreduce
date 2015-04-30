@@ -1,0 +1,26 @@
+# -*- mode: snippet -*-
+# name: struct ( TBB reduce functor )
+# key: tbbreduce
+# --
+/// $0
+struct ${1:Name}
+{
+    ${1:$(yas-substr text "[^: ]*")}($2) { }
+
+    /// tbb split ctor
+    ${1:$(yas-substr text "[^: ]*")}( ${1:$(yas-substr text "[^: ]*")}& other, tbb::split )
+      {}
+
+    /// Thread map operator
+    void operator()( const tbb::blocked_range<std::size_t>& range )
+    {
+
+    } // operator()
+
+    /// Thread reduce operator
+    void join( ${1:$(yas-substr text "[^: ]*")}& other )
+    {
+
+    }
+    
+}; // $1

@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: #if 0 ...
+# key: if0
+# --
+#if 0
+`yas/selected-text`#endif
+$0
