@@ -154,7 +154,6 @@
 ;;
 ;; The settings are basically stroustrup mode, but a few differences
 (defun nb-ide-tabsets-personal ()
-  (electric-pair-mode)
   (setq indent-tabs-mode nil)
   (setq tab-width 4)
   (setq c-basic-offset tab-width)
@@ -293,6 +292,7 @@
   (nb-ide-bindings)
   (nb-ide-loads)
   (nb-ide-hiliting)
+  (electric-pair-mode)
   (turn-on-auto-fill)
   (auto-fill-mode 1)
   (setq-default fill-column 100)
