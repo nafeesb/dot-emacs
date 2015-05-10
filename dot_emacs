@@ -87,28 +87,45 @@
 ;; Locked mode
 (global-set-key (kbd "C-c C-l") 'locked-buffer-mode)
 
-(define-minor-mode locked-buffer-mode
-  "Make the current window always display this buffer."
-  nil " locked" nil
-  (set-window-dedicated-p (selected-window) locked-buffer-mode))
 
-;; shell colors
-( require 'ansi-color )
-(defun colorize-compilation-buffer ()
-  (message "colorizing compilation")
-  (toggle-read-only)
-  (ansi-color-apply-on-region (point-min) (point-max))
-  (toggle-read-only))
-(add-hook 'compilation-filter-hook 'colorize-compilation-buffer)
-;;( ansi-color-for-comint-mode-on )
+;; ----------------------------------------
+;; OSX Specific
+;; ----------------------------------------
 
+(if (eq system-type 'darwin)
+    (progn ( global-set-key [ns-drag-file] 'ns-find-file )
+	   ( setq ns-pop-up-frames nil )
+	   ( setq ns-command-modifier 'meta)
+	   ( set-default-font "-apple-Inconsolata-medium-normal-normal-*-11-*-*-*-m-0-iso10646-1" )
+	   )
+  )
+;; emacs on PowerBooks has trouble with return key.
+;;     (cons (define-key function-key-map [return] [13])
+;; 	  (tool-bar-mode -1) )
+;;   (tool-bar-mode -1)
+;;   )
+
+
+
+;; ----------------------------------------
 ;; yasnippet
+;; ----------------------------------------
 ( add-to-list 'load-path "/home/nbinzafar/.emacs.d/elpa/yasnippet-0.8.0" )
 ( require 'yasnippet )
 ( yas-global-mode 1 )
 ( setq yas/prompt-functions '(yas/ido-prompt yas/dropdown-prompt))
 ( global-set-key [f11] 'yas/insert-snippet )
 
+
+;; ----------------------------------------
+;; 
+;; ----------------------------------------
+(define-minor-mode locked-buffer-mode
+  "Make the current window always display this buffer."
+  nil " locked" nil
+  (set-window-dedicated-p (selected-window) locked-buffer-mode))
+
+;;( ansi-color-for-comint-mode-on )
 
 ;; ----------------------------------------
 ;; -- Window Cycling
@@ -147,6 +164,15 @@
 ;; ----------------------------------------
 ;; Dev settings
 ;; ----------------------------------------
+
+;; compilation buffer colors
+( require 'ansi-color )
+(defun colorize-compilation-buffer ()
+  (message "colorizing compilation")
+  (toggle-read-only)
+  (ansi-color-apply-on-region (point-min) (point-max))
+  (toggle-read-only))
+(add-hook 'compilation-filter-hook 'colorize-compilation-buffer)
 
 ;;
 ;; IDE tab and indentation settings.
@@ -312,6 +338,27 @@
 
 (defun nb-text-hook ()
  )
+
+
+;; LaTeX editing prefs
+(add-hook 'latex-mode-hook 'latex-file-handler)
+(defun latex-file-handler ()
+ (global-set-key "\C-m" 'reindent-then-newline-and-indent)
+ (global-unset-key [C-down-mouse-2])
+ (global-set-key [C-down-mouse-2] `imenu)
+ (global-set-key "\M-[" 'match-paren)
+ (turn-on-auto-fill)
+ (auto-fill-mode 1)
+ (set-fill-column 80)
+ (turn-on-font-lock)
+ (setq font-lock-maximum-decoration t)
+ (turn-on-auto-fill)
+ (longlines-mode t)
+ (if (eq system-type 'darwin)
+     (set-variable (quote latex-run-command) "/usr/local/texlive/2013/bin/universal-darwin/pdflatex"))
+ (setq tex-dvi-view-command "xdvi"))
+
+
 
 ;;
 ;; Mode Hooks
