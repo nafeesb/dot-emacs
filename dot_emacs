@@ -167,7 +167,7 @@
   (c-set-offset 'case-label +2)      ;; switch (...) { label:
   (c-set-offset 'statement-case-open 0)
   (c-set-offset 'statement-cont 'c-lineup-math)
-  (c-set-offset 'inline-open +2)
+  ;; (c-set-offset 'inline-open +2)
  ; (setq special-display-buffer-names '("*compilation*" "*grep*")) ;; display in a separate frame
   )
 
@@ -262,7 +262,7 @@
  (global-unset-key [C-down-mouse-2])
  (global-set-key [C-down-mouse-2] `imenu)
  (global-set-key [f6] 'grep-in-code)
- (global-set-key [C-f1] 'ebrowse-tags-find-definition-other-window)
+ (global-set-key [C-f1] 'ebrowse-tags-find-definition)
  ;; (global-set-key [C-f1] 'ebrowse-tags-find-declaration-other-window)
  (global-set-key "\M-[" 'match-paren)
  (global-set-key (read-kbd-macro "C-x <right>") 'next-error)
@@ -376,9 +376,12 @@
                      "untitled"))
         (date-string (format-time-string "%m/%d/%Y" ))
         (who (user-full-name)))
-    (insert (format (concat "/// @file   %s\n"
-			    "/// @date   %s\n"
-			    "/// @author Nafees Bin Zafar <nafees.bin.zafar@odw.com.cn>\n\n\n")
+    (insert (format (concat "/*! @file   %s\n"
+			    " *  @date   %s\n"
+			    " *  @author Nafees Bin Zafar <nafees.bin.zafar@odw.com.cn>\n"
+			    " *\n"
+			    " *  @brief \n"
+			    " */\n\n")
                     file-name date-string))))
 
 
