@@ -1,0 +1,76 @@
+;;; -*- coding: utf-8 -*-
+
+;; ----- ido-last-directory-list -----
+(
+ ("/home/local/MAGICLEAP/nbinzafar/user/dev/ddna/build/mlscons/" . "tools/")
+ ("/home/local/MAGICLEAP/nbinzafar/user/dev/ddna/math/src/ml/" . "mesh/")
+ ("/home/local/MAGICLEAP/nbinzafar/user/dev/ddna/math/src/" . "ml/")
+ ("/home/local/MAGICLEAP/nbinzafar/user/dev/ddna/math/" . "src/")
+ ("/home/local/MAGICLEAP/nbinzafar/user/dev/ddna/" . "math/")
+ ("/home/local/MAGICLEAP/nbinzafar/user/dev/ddna/build/" . "mlscons/")
+)
+
+;; ----- ido-work-directory-list -----
+(
+ "/home/local/MAGICLEAP/nbinzafar/bin/"
+ "/home/local/MAGICLEAP/nbinzafar/"
+ "/home/local/MAGICLEAP/nbinzafar/user/dev/ddna/build/mlscons/tools/"
+ "/home/local/MAGICLEAP/nbinzafar/user/dev/ddna/math/src/ml/mesh/"
+ "/home/local/MAGICLEAP/nbinzafar/user/dev/ddna/math/app/"
+ "/home/local/MAGICLEAP/nbinzafar/user/dev/ddna/build/mlscons/"
+ "/home/local/MAGICLEAP/nbinzafar/user/dev/ddna/maya/modules/mlBlendShape/src/"
+)
+
+;; ----- ido-work-file-list -----
+(
+ "git-prompt.sh"
+ ".bashrc"
+ ".bash_aliases"
+ "eigen.py"
+ "Neighborhoods.hpp"
+ "SmoothMesh.hpp"
+ "SmoothMesh.cpp"
+ "README"
+ "lib.py"
+ "SConscript"
+)
+
+;; ----- ido-dir-file-cache -----
+(
+ ("/home/local/MAGICLEAP/nbinzafar/bin/" (23291 27483 450296 142000) "./" "git-prompt.sh" "../")
+
+ ("/home/local/MAGICLEAP/nbinzafar/" (23291 27956 738298 187000) "./" ".dmrc" ".gnome2/" ".xsession-errors.old" ".xsession-errors" "Public/" "Pictures/" "bin/" ".compiz/" "Templates/" ".dbus/" "Thinkbox/" ".bash_history" ".cache/" ".conda/" ".gnupg/" "Desktop/" ".bash_aliases" "pymel.log" ".inputrc" ".Xauthority" "examples.desktop" ".bash_logout" ".nv/" ".#.bashrc" ".p4qt/" "dot-emacs/" "user/" ".bashrc" "Videos/" ".ssh/" ".bash_aliases~" ".flexlmrc" ".gnome2_private/" ".k5login" ".emacs" ".gnome/" "Music/" "maya/" ".p4tickets" ".gconf/" "#.bashrc#" ".pki/" "../" ".local/" ".vscode/" "Downloads/" ".bashrc~" ".config/" "dev/" ".ICEauthority" "Adlm/" "Documents/" ".profile" ".emacs.d/")
+
+ ("/home/local/MAGICLEAP/nbinzafar/dot-emacs/" (23291 26965 698293 905000) "./" "dot_emacs.d/" ".git/" "dot_emacs~" "dot_emacs" "../" ".gitignore" "README.md")
+
+ ("/home/local/MAGICLEAP/nbinzafar/user/dev/ddna/build/mlscons/tools/" (23291 5715 840567 6000) "ann.py" "qhull.pyc" "tbb.pyc" "__init__.pyc" "pickling_tools.pyc" "gtest.py" "__init__.py" "qhull.py" "gtest.pyc" "ipopt.pyc" "ipopt.py" "boost.pyc" "eigen.py" "gprofiler.py" "tbb.py" "ann.pyc" "pickling_tools.py" "mkl.py" "eigen.pyc" "gprofiler.pyc" "mkl.pyc" "boost.py" "../" "./")
+
+ ("/home/local/MAGICLEAP/nbinzafar/user/dev/ddna/maya/modules/" (23291 24928 556351 101000) "mlLaplace.mod" "mlRigidICP/" "mlEyeAlignment/" "mlMeshCache/" "mlModelPublish/" "peelSolve.mod" "weightDriver.mod" "mlAnimCachePublish/" "mlVertexDisplacement.mod" "mlLogic/" "mlLightfield/" "mlLaplace/" "mlCameraPublish/" "peelSolve/" "mlCoherentMesh/" "mlRadialLimit.mod" "mlCoherentMesh.mod" "mlCameraStage/" "mlRetopo/" "mlUtils/" "mlUVWrap.mod" "mlEyePublish.mod" "mlEyeAlignment.mod" "mlVertexSnap/" "ngSkinTools.mod" "mlLookdev/" "mlFaceLogic.mod" "mlTension/" "mlDeltaMush/" "mlcloth.mod" "mlShapeTransfer.mod" ".vscode/" "mlcloth/" "mlBlendShape.mod" "shapeInverter.mod" "mlJiggle/" "mlJointDecomp.mod" "meshReorder/" "mlCameraPublish.mod" "mlRBF/" "mlSmoothDeform/" "mlFaceLogic/" "mlDisplace/" "mlWrinkleSetup.mod" "mlBoneDecomp.mod" "mlJiggle.mod" "mlMultiRivet.mod" "mlWeightVolume/" "mlCollider/" "meshReorder.mod" "mlUtils.mod" "mlLookdev.mod" "mlVolCapStage/" "mlMeshCache.mod" "mlShapeCleanup.mod" "mlCameraStage.mod" "mlStartup/" "mlLightfield.mod" "mlAlignmentTool.mod" "mlVertexSnap.mod" "mlEyePublish/" "mlAnimCachePublish.mod" "mlShapeTransfer/" "mlShapeCleanup/" "mlBlendShape/" "mlTension.mod" "mlShapeChecker/" "mlStartup.mod" "mlDisplace.mod" "mlMultiRivet/" "mlSmoothDeform.mod" "mlRadialLimit/" "mayaAPI_attributes_ref.cpp" "ngSkinTools/" "mlRBF.mod" "mlScanTools.mod" "mlCollider.mod" "mlUVWrap/" "mlWeightVolume.mod" "mlScanTools/" "mlAlignmentTool/" "mlhair.mod" "mlVolCapStage.mod" "GER.mod" "mlShapeChecker.mod" "mlJointDecomp/" "mlDeltaMush.mod" "weightDriver/" "mlModelPublish.mod" "mlWrinkleSetup/" "GER/" "mlhair/" "shapeInverter/" "mlVertexDisplacement/" "../" "./")
+
+ ("/home/local/MAGICLEAP/nbinzafar/user/dev/ddna/math/src/ml/mesh/" (23291 5762 265666 268000) "DeformationMatrix.hpp" "SmoothMesh.hpp" "LaplacianCoordinates.cpp" "SConscript" "DeformationMatrix.cpp" "SmoothMesh.cpp" "VirtualVertices.cpp" "LinearSystem.hpp" "Util.cpp" "Util.hpp" "DataTypes.hpp" "Neighborhoods.hpp" "README.txt" "SConstruct" "LaplacianCoordinates.hpp" "VirtualVertices.hpp" "../" "./")
+
+ ("/home/local/MAGICLEAP/nbinzafar/user/dev/ddna/math/src/ml/" (23291 18579 340334 276000) ".sconsign.dblite" "logic/" "tension/" "bone_cluster/" "SConscript" "misc/" "face/" "mesh/" "space3d/" "SConstruct" "build-log.txt" "rbf/" "../" "./")
+
+ ("/home/local/MAGICLEAP/nbinzafar/user/dev/ddna/math/src/" (23291 5761 806394 721000) "ml/" "SConscript" "Doxyfile" "SConstruct" "../" "./")
+
+ ("/home/local/MAGICLEAP/nbinzafar/user/dev/ddna/math/app/" (23291 5761 694721 260000) "README" "../" "./")
+
+ ("/home/local/MAGICLEAP/nbinzafar/user/dev/ddna/math/" (23291 5762 416247 614000) ".git/" ".gitignore" "src/" "logic_api/" "app/" "tests/" "README.md" "../" "./")
+
+ ("/home/local/MAGICLEAP/nbinzafar/user/dev/ddna/maya/modules/mlBlendShape/src/" (23291 4095 737438 666000) "SConscript" "mlBlendShape.cpp" "mlBlendShapeCmd.h" ".gitignore" "mainPlugin.cpp" "mlBlendShape.h" "mlBlendShapeCmd.cpp" "../" "./")
+
+ ("/home/local/MAGICLEAP/nbinzafar/user/dev/ddna/maya/modules/mlBlendShape/" (23291 11071 940582 814000) ".sconsign.dblite" "scripts/" "src/" "SConstruct" "build-log.txt" "../" "./")
+
+ ("/la/Departments/ddna/data/user/nbinzafar/dev/ddna/math/src/ml/bone_cluster/" (23291 11000 869842 457000) "SkinSolver.cpp" "BoneGeometryData.cpp" "OptimizeTransform.cpp" "BoneGeometryData.hpp" "OptimizeTransformNLPKernel.hpp" "SConscript" "BoneDecomposition.cpp" "OptimizeTransform.hpp" "BoneOptimization.hpp" "BoneDecomposition.hpp" "SampleData.hpp" "RigidDecomposition.cpp" "SkinSolver.hpp" "VertexJointMapping.hpp" "SConstruct" "PoseTransforms.cpp" "BoneOptimization.cpp" "ClusterData.hpp" "ClusterErrors.hpp" "ClusterData.cpp" "PoseTransforms.hpp" "ClusterErrors.cpp" "OptimizeTransformNLPKernel.cpp" "RigidDecomposition.hpp" "../" "./")
+
+ ("/home/local/MAGICLEAP/nbinzafar/user/dev/ddna/build/mlscons/" (23291 5715 873179 679000) "mac.py" "tools/" "maya.py" "linux.pyc" "linux.py" "__init__.pyc" "platform.pyc" "__init__.py" "test.py" "lib.py" "maya.pyc" "win32.pyc" "lib.pyc" "platform.py" "win32.py" "test.pyc" "mac.pyc" "../" "./")
+
+ ("/home/local/MAGICLEAP/nbinzafar/user/dev/ddna/build/" (23291 5031 77396 855000) "mlscons/" ".git/" ".gitignore" "Maya" "Makefile" "System" "tests/" "README.md" "gnu.png" "../" "./")
+
+ ("/home/local/MAGICLEAP/nbinzafar/user/dev/ddna/" (23291 8051 208402 371000) "build/" "tools/" "target/" "math/" "maya/" "../" "./")
+
+ ("/home/local/MAGICLEAP/nbinzafar/user/dev/ddna/maya/" (23291 4100 154309 18000) "modules/" ".git/" ".gitignore" "scripts/" "src/" "MayaNodeIDs.txt" "shelves/" "plugins/" "tests/" "mayaAPI_attributes_ref.cpp" "../" "./")
+)
+
+;; ----- ido-unc-hosts-cache -----
+t
